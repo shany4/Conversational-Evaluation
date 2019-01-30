@@ -1,0 +1,37 @@
+{% extends "base_template.html" %}
+
+{% block title_block %} Home {% endblock %}
+
+{% block content_block %}
+
+<br>
+<br>
+    <div class="container">
+    <div class="row">
+        <div class="col-sm"></div>
+        <div class="col-sm"  id="contact">
+            {% if user.is_staff %}
+                <form method="POST" action="{% url 'upload' %}">
+                    {% csrf_token %}
+                    <button type="submit" class="btn btn-lg">Upload</button>
+                </form>
+                &nbsp;
+                <form method="POST" action="{% url 'test_list' %}">
+                    {% csrf_token %}
+                    <button type="submit" class="btn btn-lg">Dispatch</button>
+                </form>
+                &nbsp;
+            {% endif %}
+                <form method="POST" action="{% url 'my_tasks' %}">
+                    {% csrf_token %}
+                    <button type="submit" class="btn btn-lg">My Tasks</button>
+                </form>
+
+        </div>
+        <div class="col-sm"></div>
+    </div>
+</div>
+
+
+
+{% endblock %}

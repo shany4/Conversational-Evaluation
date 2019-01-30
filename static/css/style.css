@@ -1,0 +1,457 @@
+@import url(https://fonts.googleapis.com/css?family=Roboto:400,300,600,400italic);
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  -webkit-font-smoothing: antialiased;
+  -moz-font-smoothing: antialiased;
+  -o-font-smoothing: antialiased;
+  font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+@import url("http://fontawesome.io/assets/font-awesome/css/font-awesome.css");
+select { font-family: 'FontAwesome', Verdana }
+
+button, button:focus{
+  outline:0px !important;
+  -webkit-appearance:none;
+}
+
+body {
+  /*font-family: "Roboto", Helvetica, Arial, sans-serif;*/
+  font-family: "Arial","Microsoft YaHei","黑体","宋体",sans-serif;
+  font-weight: 120;
+  font-size: 20px;
+  line-height: 30px;
+  background: #fff;
+}
+
+.container {
+  /*max-width: 400px;*/
+  width: 100%;
+  margin-top: 80px;
+  position: relative;
+}
+a{
+  color:#007bff;
+  text-decoration:none;
+}
+a:hover{
+  color:#000;
+  text-decoration:none;
+}
+
+#contact input[type="text"],
+#contact input[type="email"],
+#contact input[type="password"],
+#contact textarea,
+#contact button[type="submit"] {
+  font: 300 15px "Roboto", Helvetica, Arial, sans-serif;
+}
+
+#contact {
+  background: #F9F9F9;
+  padding: 30px;
+  margin: 10px 0;
+  box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
+}
+
+
+#contact h3 {
+  display: block;
+  font-size: 20px;
+  font-weight: 300;
+  margin-bottom: 25px;
+}
+
+#contact input:focus,
+#contact textarea:focus {
+  outline: 0;
+  border: 1px solid #aaa;
+}
+
+
+
+fieldset {
+  border: medium none !important;
+  margin: 0 0 20px;
+  min-width: 100%;
+  padding: 0;
+  width: 100%;
+}
+
+
+#contact input[type="text"],
+#contact input[type="email"],
+#contact input[type="password"],
+#contact textarea {
+  width: 100%;
+  border: 1px solid #ccc;
+  background: #FFF;
+  margin: 0 0 5px;
+  padding: 10px;
+}
+
+#contact input[type="text"]:hover,
+#contact input[type="email"]:hover,
+#contact input[type="password"]:hover,
+#contact textarea:hover {
+  -webkit-transition: border-color 0.3s ease-in-out;
+  -moz-transition: border-color 0.3s ease-in-out;
+  transition: border-color 0.3s ease-in-out;
+  border: 1px solid #aaa;
+}
+
+#contact textarea {
+  height: 100px;
+  max-width: 100%;
+  resize: none;
+}
+
+#contact button[type="submit"] {
+  cursor: pointer;
+  width: 100%;
+  border: none;
+  background: #4CAF50;
+  color: #FFF;
+  margin: 0 0 5px;
+  padding: 10px;
+  font-size: 15px;
+}
+
+#contact button[type="submit"]:hover {
+  background: #43A047;
+  -webkit-transition: background 0.3s ease-in-out;
+  -moz-transition: background 0.3s ease-in-out;
+  transition: background-color 0.3s ease-in-out;
+}
+
+#contact button[type="submit"]:active {
+  box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.5);
+}
+
+#contact button[type="next"] {
+  cursor: pointer;
+  width: 25%;
+  border: none;
+  background: #4CAF50;
+  color: #FFF;
+  margin: 15px 10px;
+  padding: 10px;
+  font-size: 15px;
+}
+
+#contact button[type="next"]:hover {
+  background: #43A047;
+  -webkit-transition: background 0.3s ease-in-out;
+  -moz-transition: background 0.3s ease-in-out;
+  transition: background-color 0.3s ease-in-out;
+}
+
+#contact button[type="next"]:active {
+  box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.5);
+}
+
+
+
+.selectpicker {
+  font-size: 15px;
+  font-weight: 300;
+}
+
+.navbar {
+  position: absolute;
+  top: 0;
+  width: 100%;
+  height:60px;
+  line-height: 60px; /* Vertically center the text there */
+  background-color: #2463b3;
+  color: #fff!important;
+}
+
+
+
+.footer {
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  /* Set the fixed height of the footer here */
+  height: 22px;
+  line-height: 22px; /* Vertically center the text there */
+  background-color: #2463b3;
+  color: #ccc;
+}
+
+
+.flex-container {
+  display: flex;
+  flex-wrap: nowrap;
+}
+.flex-container > div{
+  width:250px;
+  margin-right:20px;
+  margin-left:0px;
+}
+.flex-container2 {
+  display: flex;
+  width: 90%;
+  /*margin: 55px;*/
+  margin:auto;
+  flex-wrap: wrap;
+}
+.flex-container2 > div{
+  width:600px;
+  margin-right:60px;
+  overflow-wrap: break-word;
+}
+
+.table-editable {
+      position: relative;
+}
+.table-remove {
+  color: #700;
+  cursor: pointer;
+}
+.table-remove:hover {
+  color: #f00;
+}
+
+.table-up, .table-down {
+  color: #007;
+  cursor: pointer;
+}
+.table-up:hover, .table-down:hover {
+  color: #00f;
+}
+
+#table-add {
+  color: #070;
+  cursor: pointer;
+  /*position: absolute;*/
+  right: 0;
+}
+#table-add:hover {
+  color: #0b0;
+}
+.show{
+  cursor:pointer;
+}
+.textanim-hidden{
+  position:relative;
+  padding-left: 25px;
+  font-size: 15px;
+}
+#task-result{
+  border: 1px solid black;
+  border-collapse: collapse;
+  margin:50px;
+}
+#task-result th{
+  border: 1px solid black;
+  border-collapse: collapse;
+  margin: 170px;
+  padding: 15px;
+  text-align: left;
+} 
+#task-result td{
+  border: 1px solid black;
+  border-collapse: collapse;
+  margin: 170px;
+  padding: 15px;
+  text-align: left;
+} 
+
+.stat{
+  width:400px;
+}
+
+.export{
+  float:right;
+  text-decoration: none;
+}
+
+.checkbox-button-container{
+  padding:15px;
+}
+.checkbox-button-danger{
+  background-color:Transparent;
+  border:none;
+  cursor:pointer;
+  color:red;
+}
+.checkbox-button-label {
+    display: block;
+    position: relative;
+    padding-left: 35px;
+    height:30px;
+    margin-bottom: 3px;
+    cursor: pointer;
+    font-size: 20px;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+/* Hide the browser's default checkbox */
+.checkbox-button-label input {
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+}
+
+/* Create a custom checkbox */
+.checkmark {
+    position: absolute;
+    top: 5px;
+    left: 5px;
+    height: 20px;
+    width: 20px;
+    background:#fff;
+    border: 2px solid #999;
+}
+.checkmark-danger{
+  position: absolute;
+  top: 5px;
+  left: 5px;
+  height: 20px;
+  width: 20px;
+  border-radius:50%;
+  background:#fff;
+  border: 2px solid red;
+}
+
+/* On mouse-over, add a grey background color */
+
+.answer-div .checkbox-button-label:hover{
+    background-color: #f3f3f2;
+}
+
+/* When the checkbox is checked, add a blue background */
+.checkbox-button-label input:checked ~ .checkmark {
+    background-color: #000;
+}
+.answer-top-div .checkbox-button-label input:checked ~ .checkmark-danger {
+    background: red;
+}
+
+/* Create the checkmark/indicator (hidden when not checked) */
+.checkmark:after {
+    content: "";
+    position: absolute;
+    display: none;
+}
+
+.checkmark-danger:after {
+    content: "";
+    position: absolute;
+    display: none;
+}
+
+/* Show the checkmark when checked */
+.checkbox-button-label input:checked ~ .checkmark:after {
+    display: block;
+}
+.checkbox-button-label input:checked ~ .checkmark-danger:after {
+    display: block;
+}
+
+/* Style the checkmark/indicator */
+.checkbox-button-label .checkmark:after {
+    left: 5px;
+    top: 0;
+    width: 7px;
+    height: 13px;
+    border: solid white;
+    border-width: 0 3px 3px 0;
+    -webkit-transform: rotate(45deg);
+    -ms-transform: rotate(45deg);
+    transform: rotate(45deg);
+}
+
+.checkbox-button-label .checkmark-danger:after {
+    left: 4px;
+    top: 4px;
+    width: 7px;
+    height: 7px;
+    border-radius:50%;
+    border: solid white;
+    background: white;
+}
+
+/*tooltip Box*/
+.con-tooltip {
+
+  position: relative;
+  background: transparent;
+  
+  border-radius: 9px;
+  top:-20%;
+  padding: 0 20px;
+  /*margin-left: 300px;*/
+  
+  display: inline-block;
+  /*float:right;*/
+  
+  transition: all 0.3s ease-in-out;
+  cursor: default;
+
+}
+
+/*tooltip */
+.tooltip {
+  visibility: hidden;
+  z-index: 1;
+  opacity: .40;
+  
+  width: 300px;
+  padding: 5px 20px 0px 20px;
+
+  background: #333;
+  color: #fff;
+  
+  position: absolute;
+  top:-150%;
+  left: -200%;
+  
+
+  border-radius: 9px;
+  font: 20px;
+
+  
+  box-shadow: 0 0 3px rgba(56, 54, 54, 0.86);
+}
+
+
+/* tooltip  after*/
+.tooltip::after {
+  content: " ";
+  width: 0;
+  height: 0;
+  
+  border-style: solid;
+  border-width: 12px 12.5px 0 12.5px;
+  border-color: #333 transparent transparent transparent;
+
+  position: absolute;
+  left: 40%;
+
+}
+
+.con-tooltip:hover .tooltip{
+  visibility: visible;
+  transform: translateY(-20px);
+  opacity: 1;
+
+}
+.top:hover {transform: translateY(-4px);  }
+
+i.fa-star {
+    color: #ff9f00;
+}
+
+.nav-pills .nav-link.active, .nav-pills .show>.nav-link {
+     background-color: #ff9f00;
+}

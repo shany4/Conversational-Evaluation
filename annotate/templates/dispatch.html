@@ -1,0 +1,54 @@
+{% extends "base_template.html" %}
+
+{% block title_block %} Dispatch {% endblock %}
+
+{% block content_block %}
+    <div class="container">
+<br>
+<br>
+<form method="POST" enctype="multipart/form-data" >
+    {% csrf_token %}
+    <h2><b>&nbsp{{task}}</b></h2>
+    <table class="table table-striped">
+        <thead>
+        <tr>
+            <th> Select User </th>
+            <th> Number of Questions: </th>
+            <th><i id="table-add" class="table-add fa fa-plus fa-lg" aria-hidden="true"></i></th>
+        </tr>
+        </thead>
+        {% for s in existing_testset %}
+            {% if s.questionBank == task %}
+                <tr>
+                    <td>
+                        <select name="user" class="form-control selectpicker" id = "pick-user">
+                            <option disabled selected hidden>{{s.user.username}}</option>
+                        </select>
+                    </td>
+                    <td>
+                        <input id = "num_quest" class = "form-control" name="num"
+                               placeholder="{{s.num_question}}" type="text" tabindex="1" disabled>
+                    </td>
+                </tr>
+            {% endif %}
+        {% endfor %}
+        <tr class="dispatch_input_row">
+            <td>
+                <select name="distribute_user" class="form-control selectpicker" id = "pick-user">
+                    <option disabled selected hidden>Please select a user</option>
+                    {% for user in all_users %}
+                        <option value="{{user.username}}">{{user.username}}</option>
+                    {% endfor %}
+                </select>
+            </td>
+            <td>
+                <input id = "num_quest" class = "form-control" name="num_quest" placeholder="# of questions"
+                       type="number" tabindex="1" min="1" max={{task.num_distinct_questions}}>
+            </td>
+        </tr>
+    </table>
+    <br>&nbsp
+    <button type="submit" id="dispatch-button" name="dispatch_button" class="btn btn-success">Submit</button>
+  </form>
+</div>
+{% endblock %}

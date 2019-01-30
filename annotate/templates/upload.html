@@ -1,0 +1,43 @@
+{% extends "base_template.html" %}
+
+{% block title_block %} Upload {% endblock %}
+
+{% block content_block %}
+
+   <div class="container">
+<br>
+<br>
+  <form method="POST" enctype="multipart/form-data">
+     {% csrf_token %}
+       <h2>Upload Your Test file:</h2><br>
+     <div class="form-group">
+       <label for= "testname" style="font-weight: bold;">Test Case Name: </label>
+       <input id = "testname" class = "form-control" name="new_test_name" placeholder="Test Case Name" type="text" tabindex="1" required autofocus>
+     </div>
+     <div class="from-group">
+       <label for="date" style="font-weight: bold;">Creation Date:</label>
+       <input type="date" id="date" name="new_creation_date" placeholder="YYYY-MM-DD" required>
+     </div>
+     <fieldset>
+       <p style="font-weight: bold;"> 选择测试文件类型: </p>
+       <select name="new_test_type" class="form-control selectpicker" required id="upload_selects">
+         <option disabled selected hidden>Please select a type</option>
+         {% for t in types %}
+           {% if t == "基本测试" %}<option value="{{t}}">{{t}}</option>{% endif %}
+         {% endfor %}
+       </select>
+     </fieldset>
+     <p style="font-weight: bold;"> 选择测试文件: </p>
+     <input id="file-picker" type="file" name="file"  multiple>
+     <div id="msg"></div>
+     <br>
+     <button type="submit" id="upload-button" name="upload_new_testcase">Upload</button>
+     <br><br>
+     <button type="submit" id="upload-filter-button" name="upload_new_similarity_testcase">Upload&Filter</button>
+ </form>
+
+ </div>
+ {% block scripts %}
+   <script language="JavaScript" type="text/javascript" src="/static/js/uploadScript.js"></script>
+ {% endblock %}
+{% endblock %}

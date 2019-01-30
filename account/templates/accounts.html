@@ -1,0 +1,23 @@
+{% extends "base_template.html" %}
+
+{% block title_block %} Accounts {% endblock %}
+
+{% block content_block %}
+
+
+<br>
+<br>
+    <div class="container">
+<div>
+  <h3>Change Password</h3>
+	<form method="post" class="form-inline">
+	  {% csrf_token %}
+	  <div class="form-group">
+	    <input type="password" class="form-control" name="new_password" placeholder="New Password" required>
+	  </div>
+	  <button type="submit" class="btn btn-danger" name="change_password">Change Password</button>
+	</form>
+</div>
+    </div>
+
+{% endblock %}

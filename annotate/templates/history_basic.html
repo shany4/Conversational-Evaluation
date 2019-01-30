@@ -1,0 +1,136 @@
+{% extends "base_template.html" %}
+
+{% block title_block %} History {% endblock %}
+
+{% block content_block %}
+    <div class="container">
+    <div class="row">
+          <form method="POST" action="{% url 'history_basic' %}" class="form-inline" style="width:100%">
+          {% csrf_token %}
+              <select id="testset-pick" name="basic_testset_result" class="form-control selectpicker" style="font-family:'FontAwesome', Arial;width:70%" required>
+                <option disabled selected hidden>Please select a task</option>
+                {% for t in test_sets %}
+                <option value="{{t.id}}">{{t.name}}</option>
+                {% endfor %}
+              </select>
+            &nbsp&nbsp
+                  <button type="submit" class="btn btn-primary" name="action" value="show_result">
+                      See Result
+                  </button>
+            &nbsp&nbsp
+                  <button type="submit" class="btn btn-default" name="action" value="export">
+                      <i class="fas fa-download"></i> Export Result</button>
+          </form>
+    </div>
+    <br>
+        <div class="row">
+    <div class="col-8">
+        <canvas id="myChart" ></canvas>
+    </div>
+    <div class="col-4">
+        <ul class="nav nav-pills" id="myTab" role="tablist" style="font-size:16px; margin-bottom: 20px">
+            {% for eachRobot in robot_evaluations %}
+                {% if eachRobot.eval_str != '' %}
+            <li class="nav-item">
+                <a class="nav-link" id="pills-home-tab" data-toggle="pill" href={{ "#"|add:eachRobot.robot }}
+                        role="tab"  aria-selected="true">{{ eachRobot.robot }}</a>
+            </li>
+                {% endif %}
+            {% endfor %}
+        </ul>
+        <div class="tab-content" id="pills-tabContent">
+            {% for eachRobot in robot_evaluations %}
+                {% if eachRobot.eval_str != '' %}
+            <div class="tab-pane fade" id={{ eachRobot.robot }} role="tabpanel">
+                <pre>{% autoescape off %}{{ eachRobot.eval_str|safe }}{% endautoescape %}</pre>
+            </div>
+                {% endif %}
+            {% endfor %}
+        </div>
+    </div>
+</div>
+        <br>
+        <div class="row">
+            <div class="col-8">
+                <canvas id="myChart_bar" ></canvas>
+            </div>
+        </div>
+    </div>
+
+<script>
+var ctx = document.getElementById("myChart");
+var ctbar = document.getElementById("myChart_bar");
+var myChart = new Chart(ctx, {
+    type: 'radar',
+    data: {
+        labels: ["内容分", "形式分", "发散分", "情感分", "关联分"],
+        datasets: [
+            {% for data in dataSet %}
+                {% autoescape off %}
+                    {{ data|safe }},
+                {% endautoescape %}
+            {% endfor %}
+        ]
+    },
+    options: {
+        scale: {
+            ticks: {
+                backdropColor: 'rgba(255, 255, 255, 0.5)',
+                stepSize: 20,
+                suggestedMin: 0,
+                suggestedMax: 100
+            },
+            pointLabels: {
+                fontSize: 14
+            },
+            scaleLabel: {
+                fontColor: 'rgba(255, 255, 255, 0.2)',
+                fontSize: 15
+            }
+        }
+    }
+});
+var myChartBar = new Chart(ctbar, {
+    type: 'bar',
+    data: {
+        labels: [
+                {% autoescape off %}
+                    {{ robots|safe }},
+                {% endautoescape %}],
+        datasets: [
+            {label: "严重错误答案",
+                backgroundColor: '#EBCCD1',
+                data: {% autoescape off %} {{ unaccept|safe }}, {% endautoescape %}
+            },
+            {label:"测试题目总数",
+                backgroundColor: '#D6E9C6',
+                data: {% autoescape off %} {{ total|safe }}, {% endautoescape %}
+            }
+        ]
+    },
+    options: {
+        scales: {
+            xAxes: [{ stacked: true }],
+            yAxes: [{
+                stacked: false,
+                ticks: {
+                    suggestedMin: 0
+                }
+            }]
+        },
+        ticks: {
+            beginAtZero:true,
+            suggestedMin: 0,
+        }
+    }
+});
+$('#myTab a').on('click', function (e) {
+  e.preventDefault()
+  $(this).tab('show')
+})
+</script>
+      
+
+
+{% endblock %}
+

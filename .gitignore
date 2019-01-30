@@ -1,0 +1,5 @@
+*.pyc
+.idea/*
+common_static/*
+media/tasks/*
+db.sqlite3

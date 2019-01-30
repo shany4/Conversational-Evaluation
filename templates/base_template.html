@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+{% load staticfiles %}
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>{% block title_block %} {% endblock %}</title>
+    
+    
+    
+    <!-- Twitter Bootstrap -->
+    <!-- Latest compiled and minified CSS -->
+      <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+      <link rel="stylesheet" href="https://npmcdn.com/flickity@2/dist/flickity.css">
+
+      <link rel="stylesheet" href="{% static 'css/style.css' %}">
+      <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+      <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css"
+        integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp" crossorigin="anonymous">
+		<!-- Optional theme -->
+
+		<!-- Latest compiled and minified JavaScript -->
+    <!-- JQuery Google CDN -->
+      <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.bundle.js"></script>
+      <script src="http://malsup.github.com/jquery.form.js"></script>
+      <script src="https://npmcdn.com/flickity@2/dist/flickity.pkgd.js"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+      <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+      <script type="text/javascript" src="{% static 'js/script.js' %}"></script>
+      <script type="text/javascript" src="{% static 'js/script2.js' %}"></script>
+    {% block dependency_block %} {% endblock %}
+  </head>
+  
+  <script type="text/javascript">
+  	$(function(){
+  		if ('{{message}}'.length) {
+  			alert('{{message}}');
+  		}
+      if ('{{refresh}}'.length) {
+        alert('{{refresh}}');
+        window.location.reload(true);
+      }
+  	});
+  </script>
+  <style>
+    {% block style_block %} {% endblock %}
+    button:focus{
+      outline: none !important;
+    }
+  </style>
+  <body>
+  
+   
+    <nav class="navbar navbar-expand-md navbar-dark fixed-top">
+      <div class="collapse navbar-collapse" id="navbarCollapse">
+        <ul class="nav navbar-nav" style="color:white!important; font-size:23px; font-family:'FontAwesome', Arial;">
+            {% if not user.is_superuser %}
+        {% if user.is_staff %}
+          <li class="nav-item {% if 'home' in request.get_full_path %}active{% endif %}" >
+            <a class="nav-link" href="{% url 'home' %}" >&#xf015; Dashboard  </a>
+          </li>
+          <li class="nav-item {% if 'upload' in request.get_full_path %}active{% endif %}">
+            <a class="nav-link" href="{% url 'upload' %}" >  Upload  </a>
+          </li>
+          <li class="nav-item {% if 'test_list' in request.get_full_path or 'dispatch' in request.get_full_path%}active{% endif %}">
+            <a class="nav-link" href="{% url 'test_list' %}" >  Dispatch  </a>
+          </li>
+          <li class="nav-item {% if 'history' in request.get_full_path %}active{% endif %}">
+            <a class="nav-link" href="{% url 'history' %}" >  History  </a>
+          </li>
+        {% endif %}
+          <li class="nav-item {% if 'my_tasks' in request.get_full_path %}active{% endif %}">
+            <a class="nav-link" href="{% url 'my_tasks' %}" >   My Tasks  </a>
+          </li>
+        {% endif %}
+        </ul>
+
+
+        <ul class="navbar-nav flex-row ml-md-auto d-none d-md-flex">
+          {% if not user.is_superuser %}
+          <li class="nav-item">
+              <form method="post" class="form-inline" action="{% url 'accounts' %}">
+                  {% csrf_token %}
+                  <button type="submit" class="btn btn-info" name="reset">Reset password</button>
+                  &nbsp
+              </form>
+          </li>
+          {% endif %}
+          <li class="nav-item">
+              <form method="post" class="form-inline" action="{% url 'login' %}">
+                  {% csrf_token %}
+                  &nbsp
+                  <button type="submit" class="btn btn-info" name="log_out">Log Out</button>
+                  &nbsp
+              </form>
+          </li>
+        </ul>
+
+      </div>
+    </nav>
+    <br>
+
+        {% block content_block %} {% endblock %}
+
+
+    <br>
+    <br>
+    <br>
+    <footer class="footer text-center">
+      <div class="footer">
+        <span style="font-size: 14px;">Copyright <sup>©</sup> - RSVP Technology Inc. 2018 -</span>
+      </div>
+    </footer>
+  </body>
+</html>

@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+{% load staticfiles %}
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>LogIn</title>
+    
+    
+    
+    <!-- Twitter Bootstrap -->
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+
+    <link rel="stylesheet" href="{% static 'css/../../static/css/style.css' %}">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+    <!-- Optional theme -->
+    
+    <!-- Latest compiled and minified JavaScript -->
+    <!-- JQuery Google CDN -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="http://malsup.github.com/jquery.form.js"></script> 
+    <script type="text/javascript" src="{% static 'js/script.js' %}"></script>
+    
+    {% block dependency_block %} {% endblock %}
+  </head>
+  
+  <script type="text/javascript">
+    $(function(){
+      if ('{{message}}'.length) {
+        alert('{{message}}');
+      }
+    })
+      
+  </script>
+  </style>
+  <body>
+  
+   
+    <nav class="navbar navbar-expand-md navbar-dark fixed-top">
+      <!-- <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button> -->
+      <div class="collapse navbar-collapse" id="navbarCollapse">
+      
+    
+      
+      </div>
+    </nav>
+    <br>
+    <br>
+    <br>
+    <div class="container-fluid">
+      <div class="container-fluid">
+        <div class="row">
+    <div class="col-lg-4"></div>
+    <div class="col-lg-3">
+      <form id="contact" method="post">
+        <h3 class="text-center">Please Sign In</h3>
+        {% csrf_token %}
+        <fieldset>
+          <input name="user_name" placeholder="Username" type="text" tabindex="1" required autofocus>
+        </fieldset>
+        <fieldset>
+          <input name="password" placeholder="Password" type="password" tabindex="1" required autofocus>
+        </fieldset>
+        <!-- <fieldset>
+          <select name="task" class="form-control selectpicker" required>
+            <option disabled selected hidden>Please select a task</option>
+            {% for task in tasks %}
+            <option value="{{task}}">{{task}}</option>
+            {% endfor %}
+          </select>
+        </fieldset> -->
+        <fieldset>
+          <button name="log_in" type="submit" id="contact-submit" data-submit="...Sending">Enter</button>
+        </fieldset>
+      </form>
+    </div>
+  </div>
+
+<br>
+<br>
+      </div>
+    </div>
+
+    <br>
+    <br>
+    <br>
+    <footer class="footer text-center">
+      <div class="footer">
+        <span>Copyright © -RSVP Technology Inc. 2017-</span>
+      </div>
+    </footer>
+  </body>
+</html>
+
+ 
+  
+<!-- <div>
+  <h3 class="text-center">Reset Password</h3>
+	<form method="post" class="form-inline">
+	  {% csrf_token %}
+	  <div class="form-group">
+	    <label>User Name</label>
+	    <input type="text" class="form-control" name="reset_user_name" placeholder="User Name" required>
+	  </div>
+	  <button type="submit" class="btn btn-danger" name="reset_password">Reset Password</button>
+	</form>
+</div> -->

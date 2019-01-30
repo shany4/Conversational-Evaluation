@@ -1,0 +1,77 @@
+{% extends "base_template.html" %}
+
+{% block title_block %} Accounts Management {% endblock %}
+
+{% block content_block %}
+        <div class="container">
+<div>
+  <h3>Create New User</h3>
+	<form id="new_user" method="post" class="form">
+	  {% csrf_token %}
+	  <div class="form-group">
+	    <label for="username">New User Name</label>
+	    <input type="text" id = "username" class="form-control" name="new_user_name" placeholder="New User Name" required>
+	  </div>
+	  <div class="form-group">
+	    <label for="firstname">First Name</label>
+	    <input type="text" id="firstname" class="form-control" name="first_name" placeholder="First Name" required>
+	  </div>
+	  <div class="form-group">
+	    <label>Last Name</label>
+	    <input type="text" class="form-control" name="last_name" placeholder="Last Name" required>
+	  </div>
+	  <div class="form-group">
+	    <label>Password</label>
+	    <input type="password" class="form-control" name="password" placeholder="Password" required>
+	  </div>
+	  <div class="form-check">
+	    <input type="checkbox" id="staff" class="form-check-input" name="staff" value="True">
+	    <label for="staff">Staff</label>
+	  </div>
+	  <button type="submit" class="btn btn-success" name="create_new_user">Create New User</button>
+	</form>
+</div>
+
+<hr>
+
+<div>
+  <h3>Active Users</h3>
+	<form method="post" class="form-inline">
+	  {% csrf_token %}
+	  <table class="table table-striped">
+	    <tr>
+	      <th></th> <th> User Name </th> <th> First Name </th> <th> Last Name </th> <th> Creation Date </th> <th> Staff</th> <th></th>
+	    </tr>
+	    {% for active_user in active_users %}
+	    <tr>
+	      <td><input type="checkbox" name="{{active_user.username}}"></td>
+	      <td> {{active_user.username}} </td> <td> {{active_user.first_name}} </td> <td> {{active_user.last_name}} </td> <td> {{active_user.date_joined}} </td> <td>{{active_user.is_staff}}</td>
+	      <td><button type="submit" class="btn btn-danger" name="delete_user">D</button></td>
+	    {% endfor %}
+    </table>
+	  <button type="submit" class="btn btn-danger" name="deactivate_user">Deactivate selected user(s)</button>
+	</form>
+</div>
+
+<hr>
+
+<div>
+  <h3>Inactive Users</h3>
+	<form method="post" class="form-inline">
+	  {% csrf_token %}
+    <table class="table table-striped">
+	    <tr>
+	      <th></th> <th> User Name </th> <th> First Name </th> <th> Last Name </th> <th> Email </th> <th> Creation Date </th> <th> Staff</th>  
+	    </tr>
+	    {% for inactive_user in inactive_users %}
+	    <tr>
+	      <td><input type="checkbox" name="{{inactive_user.username}}"></td>
+	      <td> {{inactive_user.username}} </td> <td> {{inactive_user.first_name}} </td> <td> {{inactive_user.last_name}} </td> <td> {{inactive_user.email}} </td> <td> {{inactive_user.date_joined}} </td><td>{{inactive_user.is_staff}}</td>
+	    </tr>
+	    {% endfor %}
+    </table>
+	  <button type="submit" class="btn btn-success" name="reactivate_user">Reactivate selected user(s)</button>
+	</form>
+</div>
+        </div>
+{% endblock %}

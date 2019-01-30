@@ -1,0 +1,31 @@
+{% extends "base_template.html" %}
+
+{% block title_block %} History {% endblock %}
+
+{% block content_block %}
+<div class="container">
+    <div class="row">
+          <form method="POST" action="{% url 'history_answer_acceptance' %}" class="form-inline" style="width:100%">
+          {% csrf_token %}
+              <select id="testset-pick" name="answer_acceptance_testset_result" class="form-control selectpicker" style="font-family:'FontAwesome', Arial;width:70%" required>
+                <option disabled selected hidden>Please select a task</option>
+                {% for t in test_sets %}
+                <option value="{{t.id}}">{{t.name}}</option>
+                {% endfor %}
+              </select>
+            &nbsp&nbsp
+                  <button type="submit" class="btn btn-primary" name="action" value="show_result">
+                      See Result
+                  </button>
+                      &nbsp&nbsp
+                  <button type="submit" class="btn btn-default" name="action" value="export">
+                      <i class="fas fa-download"></i> Export Result</button>
+          </form>
+    </div>
+<br>
+    <div align="center">
+        <pre>{{ result }}</pre>
+    </div>
+</div>
+
+{% endblock %}

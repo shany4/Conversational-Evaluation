@@ -1,0 +1,31 @@
+{% extends "base_template.html" %}
+
+{% block title_block %} History {% endblock %}
+
+{% block content_block %}
+<br>
+<br>
+<div class="container">
+    <div class="row">
+        <div class="col-sm"></div>
+        <div class="col-sm" id="contact">
+            <a href="{% url 'history_basic' %}" >
+                {% csrf_token %}
+                <button type="submit" class="btn btn-lg">基本测试</button>
+            </a>
+            &nbsp&nbsp
+            <a href="{% url 'history_similarity' %}" >
+                <button type="submit" class="btn btn-lg">答案相似度</button>
+            </a>
+             &nbsp&nbsp
+            <a href="{% url 'history_answer_acceptance' %}" >
+                <button type="submit" class="btn btn-lg">答案接受度对比</button>
+            </a>
+        </div>
+        <div class="col-sm"></div>
+    </div>
+</div>
+      
+
+
+{% endblock %}

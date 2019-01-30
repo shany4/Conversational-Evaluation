@@ -1,0 +1,35 @@
+{% extends "base_template.html" %}
+
+{% block title_block %} Pick Test {% endblock %}
+
+{% block content_block %}
+<br>
+<br>
+<div class="container">  
+    <div class="row">
+
+      <div class="col-lg-4"></div>
+      <div class="col-lg-4">
+          <form method="POST" action="{% url 'question_card_handler' testset_id=-1 %}" id="contact">
+          {% csrf_token %}
+            <h3 class="text-center">Please Select a task</h3>
+            <fieldset>
+              <select id="testset-pick" name="testset_result" class="form-control selectpicker" style="font-family:'FontAwesome', Arial;" required>
+                <option disabled selected hidden>Please select a task</option>
+                {% for task in tasks %}
+                <option value="{{task.id}}">{{task.questionBank}}</option>
+                {% endfor %}
+                {% for task in finished_tasks %}
+                <option value="{{task.id}}" style="color:grey">{{task.questionBank}} &#xf00c;</option>
+                {% endfor %}
+              </select>
+            </fieldset>
+            <button type="submit" id="test-pick-button" name="pick_test">Enter</button>
+          </form>
+      </div>
+    </div>
+
+  </div>
+
+
+{% endblock %}

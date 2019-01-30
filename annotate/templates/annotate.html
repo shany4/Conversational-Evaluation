@@ -1,0 +1,112 @@
+
+{% extends "base_template.html" %}
+
+{% block title_block %} Question Card {% endblock %}
+
+{% block content_block %}
+    <script language="javascript">
+        //防止页面后退
+        history.pushState(null, null, document.URL);
+        window.addEventListener('popstate', function () {
+            history.pushState(null, null, document.URL);
+        });
+    </script>
+    <div class="container-fluid">
+    <div class="container-fluid">
+        <div class="answer-top-div" style="margin-left:70px; margin-top:100px; width:600px !important;">
+            <div class="answer-option-cell">
+                <div data-sm-checkbox class="checkbox-button-container">
+                    <form method="POST" action="{% url 'question_card_handler' testset_id=testset_id %}" >
+                    {% csrf_token %}
+                        {% if type == '基本测试' %}
+                            <button type="submit" name = "unacceptable" class="checkbox-button-danger">
+                                <i class="fas fa-ban"></i> 答案不可以被接受 </button>
+                            <div class="con-tooltip top" style="color:black !important; font-size: initial;">
+                                <i class="fa fa-question-circle"></i>
+                                <div class="tooltip ">
+                                    <p>色情，暴力，辱骂，政治等；语法错误；毫无意义</p>
+                                </div>
+                            </div>
+                        {% elif type == '答案相似度' %}
+                            <label> <b> 请在右边各项中勾出所有与左边问题相似的选项 </b></label>
+                        {% endif %}
+                    </form>
+                </div>
+            </div>
+        </div>
+        <div class="flex-container2">
+                <div style="float:left; width:50%">
+                    <form class="query-answer-page" action="{% url 'question_card_handler' testset_id=testset_id %}"
+                          id="contact" method="post">
+                        {% csrf_token %}
+                        <h3 class="text-center">{{title}}</h3>
+
+                        <fieldset>
+                            <p>
+                                {% for line in question_text %}
+                                    {% if line == 'Query:' or line == 'Answer:' %}
+                                        <b>{{line}}</b>
+                                    {% else %}
+                                        {{line}}
+                                    {% endif %}
+                                    <br>
+                                {% endfor %}
+                            </p>
+                        </fieldset>
+                        <br>
+                        <fieldset>
+                            <p>{{current_index}}/{{total}} annotated.</p>
+                        </fieldset>
+                    </form>
+                    <br>
+                    <br>
+                    {% if current_index != 0 %}
+                        <table style="width:100%">
+                            <tr>
+                                <th>
+                                    <form method="POST" action="{% url 'question_card_handler' testset_id=testset_id %}" >
+                                        {% csrf_token %}
+                                        <button type="submit" class="btn btn-lg btn-secondary" name="previous"> Previous </button>
+                                    </form>
+                                </th>
+                        </table>
+                    {% endif %}
+                </div>
+                <div class="answer-div" style="width:600px !important; float:right; ">
+                    <form method="POST" action="{% url 'question_card_handler' testset_id=testset_id %}" id="contact">
+                        {% csrf_token %}
+                        {% for t in choice_list %}
+                            <div class="answer-option-cell">
+                                <div data-sm-checkbox class="checkbox-button-container">
+                                    <label for="{{forloop.counter}}" class="checkbox-button-label">
+                                        {% if t == '没有与左边相似的选项' %}
+                                            <b>{{t}}</b>
+                                        {% elif t == '答案不可以被接受' %}
+                                            <b style="color:red;">{{t}}</b>
+                                        {% elif t == '答案可以被接受' %}
+                                            <b style="color:green;">{{t}}</b>
+                                        {%  else %}
+                                        {{t}}
+                                        {%  endif %}
+                                        <input id="{{ forloop.counter }}" value="{{ forloop.counter }}" type="checkbox"
+                                               {% if forloop.counter|stringformat:"s" in existed_answer %}
+                                               checked="checked" {% endif %}
+                                               class="checkbox-button-input" name="annotation">
+                                        <span class="checkmark"></span>
+                                    </label>
+                                </div>
+                            </div>
+                        {% endfor %}
+
+                        <table style="width:100%; margin-top:25px;">
+                            <tr>
+                                <th>
+                                    <button type="submit" name="next_question" id="submit_annotation" class="btn btn-lg btn-secondary" style="float: right;"> OK </button>
+                                </th>
+                        </table>
+                    </form>
+                </div>
+            </div>
+    </div>
+    </div>
+{% endblock %}
