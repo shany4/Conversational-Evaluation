@@ -46,7 +46,7 @@ Notice: your local machine must have Python and Django installed in order for th
 2. Click on "Upload"
 3. Enter a unique test case name (English letters only!) and select 基本测试
 4. Choose a file:
-   - please follow the template of sample_demo.xls
+   - please follow the template of template.xls
    - make sure you upload a `.xls` file
 5. Click on "Upload"
 6. Click on "Dispatch" to proceed to the Dispatch page, or "Upload" to upload a new file
