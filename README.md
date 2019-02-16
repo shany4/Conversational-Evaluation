@@ -1,6 +1,6 @@
 # Conversation Evaluation System
 ## Deployment:
-#### If for usage only (not for development), go to http://192.168.1.39/accounts/login and jump to the next section (Create User)
+#### If for usage only (not for development), go to http://72.143.107.250:8000/accounts/login/ and jump to the next section (Create User)
 
 
 #### If for development, follow the steps below to set up the project:
